@@ -2,5 +2,5 @@
 
 print ("Hello world!")
 
-print ("Today is 20160829.")
+print ("Today is 20160829.Linux test")
 
