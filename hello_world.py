@@ -1,6 +1,3 @@
-#/usr/bin/python
-
-print ("Hello world!")
-
-print ("Today is 20160829.Linux test")
-
+L = range(1,11)
+print ["num is %s" % str(num)  +
+       "test" for num in L]
