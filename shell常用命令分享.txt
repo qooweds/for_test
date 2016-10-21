@@ -1,0 +1,61 @@
+做分享的初衷是希望大家能节省些时间
+
+
+====================================================================================================
+计划:
+(可以先考虑说下linux目录,万物皆文件,例如/proc 其实只存在内存中;内有很多文件可供我们测试用 参考http://blog.csdn.net/zdwzzu2006/article/details/7747977)
+然后从root新建一个账户 adduser
+直接就到了test账户 新用户
+ls cd(cd -) pwd C-r history
+
+(20min)第一部分:实用命令介绍,例如find base64 tr等等(可以考虑从tr转进到sed部分)
+(5min)第二部分,vim(不细说,介绍常用的即可,因为一般用得少) awk sed介绍
+(5min)第三部分,脚本介绍
+其他:参考linux变成及网上找一点shell编程书籍
+
+====================================================================================================
+本月分享：
+shell常用命令：
+1.回顾shell命令和技巧，包括正则表达式；base64 file等小命令啊；shell操作安全（例如删除前要先ls以及备份,使用非root账号进行日常操作等）
+. / ~ 的区别 ls -lrt mv cp sudo su -
+find grep的使用
+vim的基本使用 页首页尾 行首行尾 逐单词跳过(词头词尾) 查找 替换 (除此之外,还有文件内跳转等等)
+从tr到sed
+awk的使用,awk语法的三个部分 例如:grep过滤一个表格里面所有带某string的数据行,然后将结果用awk进行输出,最后用sed或者shell进行操作;或者有多少个相同的字段
+sort 例如sort之后 -k2nr 对结果进行排序
+tail/head more/less的使用
+chmod
+crontab
+mysql操作
+top
+ps
+netstat
+管道(管道是什么?进程间通信的多种方式)
+
+简单介绍:
+rsync
+wget
+tar
+ssh
+mail
+curl  http://tieba.baidu.com/p/2730643937
+expect?
+tcpdump(dump the traffic on a network) http://www.cnblogs.com/ggjucheng/archive/2012/01/14/2322659.html
+
+2.完全熟悉markdown语法
+3.自己希望熟悉的shell部分
+软连接硬链接
+?shell脚本,shell中的小括号,中括号,大括号
+基本四则运算(let c=$a+$b 建议还是用python)
+
+
+====================================================================================================
+vim部分
+参考http://coolshell.cn/articles/5426.html
+u → undo
+<C-r> → redo
+
+举例:(貌似有点太麻烦,选些简单有用的例子)
+处理这一串字符串
+  echo "{\"defaultValue\":\"vaR$i\",\"description\":\"\",\"disabled\":false,\"fileSingleSizeLimit\":0,\"label\":\"vaR$i\",\"limits\":[],\"mandatory\":false,\"maxLength\":128,\"name\":\"vaR$i\",\"options\":null,\"order\":$i,\"rules\":\"\",\"type\":\"HIDDEN_TYPE\"},"
+循环1-100
