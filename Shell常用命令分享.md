@@ -61,21 +61,16 @@
 		2表示标准错误
 
 		2.重定向输出:将命令的正常输出结果保存到指定的文件中,而不是直接显示在显示器的屏幕上
-
 		若重定向的输出的文件不存在，则会新建该文件
 		> 重定向输出(覆盖文件)
 		>> 重定向输出(追加内容)
 		
+		其他重定向知识
 		< 重定向输入: 将命令中接收输入的途径由默认的键盘改为其他文件.而不是等待从键盘输入
-		
 		2> 错误重定向:类似于重定向输出
-		
 		&> 混合输出:不区分标准输出和错误输出
-		
 		&等同于
-
 		/dev/null 垃圾桶:无法读取任何文件，也不会因为输出的内容过多而导致文件大小不断的增加
-		
 		ls /tmp /nginx 1>a.txt 2>b.txt
 		> /dev/null 2>&1
 - 账户及权限切换
@@ -84,6 +79,9 @@
 		su - 
 		exit
 		chmod u:用户，g:组，o:其它，a所有用户(默认)； r=4,w=2,x=1
+- 其他基本命令
+
+		mv, cp, rm, touch, mkdir等命令
 
 ##2.实用小命令
 - tr
@@ -147,19 +145,92 @@
 		lic@lic:~/tmp$ echo "d3d3Lmh5cGVycy5jb20K" |base64 -d
 		www.hypers.com
 
-##2.常用命令
+##3.常用命令
 - grep
+
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |grep 104
+
+		打印行号
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -n 104
+
+		打印文件名
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -H 104
+
+		统计行数
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -c 104
+
+		使用扩展的正则表达式
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -E "104|103"
+
+		排除某些行
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -Ev "99|103" 
 - find
+
+		查找指定目录,指定深度,符合某些特征文件名的文件
+		qooweds@ubuntu:~/git/python$ find . -maxdepth 1 -name "test_data.txt"
+
+		查找含有某些字符串的文件
+		qooweds@ubuntu:~/git/python$ find . -maxdepth 1 -name "*.txt" |xargs grep -HEnv "99|103"
+
 - sed
+
+		替换并输出指定字符或字符串
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/字符串_1/字符串_2/g'
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\@/\#/g'
+
+		替换并修改指定字符或字符串
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\@/\#/g'
+
+		仅替换每行第一个
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\'"/\####/'
+
+		仅打印发生变化的行
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n 's/104/一百四/pg'
+		
+		限定替换的行
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n '80,85s/104/一百四/pg'
+
+		同时进行多种替换
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n '80,85s/104/一百四/pg;s/103/一百三/pg'
 - awk
+
+		默认分隔符为空格
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |awk '{print $2}'
+
+		指定分隔符
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |awk -F ':' '{print $2}'
+
+		对某一列数值按数值从大到小进行排序
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |awk -F ':|,' '{print $9}' |sort -k1nr |head -20
+
+		将邮箱按ASCII字符顺序进行排序
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |awk -F ':|,' '{print $13}' |sed 's/\"//g' |sort -k1 |head -20
+
+		BEGIN,END模式
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |head -5|awk -F ':|,' 'BEGIN {print "aaa"} {if($9>90)print $9} END{print "bbb"}'
+
 - vim
-##2.其他命令介绍
+
+		0 到行头
+		$ 到行尾
+		gg 到文档头
+		G 到文档尾
+		dd 剪切当前行
+		(n)dd 剪切从当前行起的多行
+		o 从下一行插入
+		O 从上一行插入
+		/pattern → 搜索 pattern 的字符串
+		n 跳到下一个搜索字符
+		# 跳到上一个搜索字符
+		
+##4.其他命令介绍
 - crontab
 - ssh
 - rsync
 - top
 - ps
 - netstat
+- wc
 
 - wget
 - tar
