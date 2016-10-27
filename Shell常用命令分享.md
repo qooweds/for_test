@@ -81,7 +81,9 @@
 		chmod u:用户，g:组，o:其它，a所有用户(默认)； r=4,w=2,x=1
 - 其他基本命令
 
-		mv, cp, rm, touch, mkdir等命令
+		ls, mv, cp, rm, touch, mkdir等命令,例如
+		root@laogu8:/home/sgm/logs# ls -Slr
+		root@laogu8:/home/sgm/logs# ls -lrt
 
 ##2.实用小命令
 - tr
@@ -222,6 +224,7 @@
 		/pattern → 搜索 pattern 的字符串
 		n 跳到下一个搜索字符
 		# 跳到上一个搜索字符
+		vim内替换: 类似于sed
 		
 ##4.其他命令介绍
 - crontab
