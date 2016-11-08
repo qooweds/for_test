@@ -39,7 +39,7 @@
 		第五栏位，表示文件大小
 		第六个栏位，表示创建日期
 		第七个栏位，表示文件名
-		Linux的文件是没有所谓的扩展名的，扩展名只是作为执行软件或程序识别用；文件能否被执行仅余
+		Linux的文件是没有所谓的扩展名的，扩展名只是作为执行软件或程序识别用；文件能否被执行仅与执行权限有关
 
 		3.软链接和硬链接
 		建立软链接ln -s
@@ -51,6 +51,7 @@
 
 		| 管道符号
 		command 1 | command 2 他的功能是把第一个命令command 1执行的结果作为command 2的输入传给command 2
+		(/todo:与exec的区别)
 
 
 - 重定向
@@ -210,6 +211,9 @@
 
 		BEGIN,END模式
 		qooweds@ubuntu:~/git/python$ cat test_data.txt |head -5|awk -F ':|,' 'BEGIN {print "aaa"} {if($9>90)print $9} END{print "bbb"}'
+		
+		//todo tail -f |awk
+		//todo linux/win/mac 下的换行符
 
 - vim
 
@@ -239,4 +243,4 @@
 - tar
 - mail
 - curl
-- tcpdump
+- tcpdump	(//todo tcpdump与tcp/ip测试)
