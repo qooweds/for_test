@@ -1,4 +1,4 @@
-#test
+X`#test
 
 ##1.基础知识
 - Linux目录结构和文件
@@ -80,6 +80,8 @@
 		su - 
 		exit
 		chmod u:用户，g:组，o:其它，a所有用户(默认)； r=4,w=2,x=1
+		//todo 文件夹 755 ，文件 644 
+		//7 等于 4+2+1 ， 4 是可读， 2 是可写， 1 是可执行
 - 其他基本命令
 
 		ls, mv, cp, rm, touch, mkdir等命令,例如
@@ -234,7 +236,7 @@
 - crontab
 - ssh
 - rsync
-- top
+- top	// 按1显示多核
 - ps
 - netstat
 - wc
@@ -244,3 +246,12 @@
 - mail
 - curl
 - tcpdump	(//todo tcpdump与tcp/ip测试)
+- df等查看硬盘容量,文件大小命令
+- 常用小命令:ifconfig history Ctrl+r
+
+//todo mount命令 挂载到虚拟机
+//todo 考虑分享往自动化的方向靠
+//todo 广度:设计场景,可以从场景来引导
+//todo 1.查看日志,做统计 
+//todo 深度:linux内存使用原理(大头)
+
