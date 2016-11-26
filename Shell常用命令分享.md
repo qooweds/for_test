@@ -139,6 +139,10 @@
 		lic@lic:~/tmp$ cat test_data |more +50
 		从的一个string_1开始显示
 		lic@lic:~/tmp$ cat test_data |more +/string_1
+- uniq
+		
+		去除重复行
+		lic@lic:~/tmp$ cat test_data |head -n 30 |uniq -c
 
 - 其他，例如base64
 
