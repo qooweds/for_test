@@ -3,10 +3,10 @@
 ##1.常用操作
 - 第一次进入Linux会用到的命令
 
-		ls(按顺序显示文件), mv, cp, rm(注意rm -rf前要ls), touch, mkdir,pwd等命令,例如
+		ls(按顺序显示文件), cd(cd -), cat, mv, cp, rm(注意rm -rf前要ls), touch, mkdir,pwd等命令,例如
 		root@laogu8:/home/sgm/logs# ls -Slr
 		root@laogu8:/home/sgm/logs# ls -lrt
-- Linux目录结构和文件
+- 了解一下各个目录存放什么
 
 		1.文件
 		在linux系统中一切皆文件.文件夹和设备都是文件.使用文件描述符(fd:file descriptor)来对文件进行操作.文件描述符是整数
@@ -35,7 +35,9 @@
 		"/tmp":临时文件目录.
 		"/var":存放经常变动的数据,像日志.邮件等.
 		
-		2.文件基本信息
+- 了解单个文件的使用
+
+		1.查看
 		lic@lic:~/tmp$ ls -l 
 		-rw-rw-r-- 1 lic lic 19 Oct 25 07:21 tmp1.sh
 		第一个小格是特殊表示格，表示目录或连结文件等等，d表示目录，l表示软链接文件，“-”表示文件
@@ -46,25 +48,53 @@
 		第五栏位，表示文件大小
 		第六个栏位，表示创建日期
 		第七个栏位，表示文件名
-		Linux的文件是没有所谓的扩展名的，扩展名只是作为执行软件或程序识别用；文件能否被执行仅与执行权限有关
+		扩展名只是作为执行软件或程序识别用；文件能否被执行仅与执行权限有关
+
+		2.权限
+		sudo
+		su - 
+		exit
+		chmod 
+		u:用户，g:组，o:其它，a所有用户(默认)； 
+		r=4,w=2,x=1
+		//7 等于 4+2+1 ， 4 是可读， 2 是可写， 1 是可执行
+		常见权限：
+		444 r–r–r–
+		600 rw——-
+		644 rw-r–r–
+		666 rw-rw-rw-
+		700 rwx——
+		744 rwxr–r–
+		755 rwxr-xr-x
+		777 rwxrwxrwx
+		lic@lic:~/tmp$ chmod a+x test
+		lic@lic:~/tmp$ chmod 777 test
+		
 
 		3.软链接和硬链接
 		inode:索引节点，是文件的唯一标识而非文件名
-		建立软链接 ln -s
-		建立硬链接 ln
-		显示inode ls -aliF
-		（元数据中的 inode 号才是文件的唯一标识而非文件名）
-		（参考文档:http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/）
+		建立软链接 ln -s 存放是另一文件的路径名的指向
+		建立硬链接 ln		存放的是inode的指向
+		显示inode ls -i
+		好处：方便，隐藏路径，增加安全性
+
+		（了解更多:http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/）
 ![](https://raw.githubusercontent.com/qooweds/for_test/master/image002.jpg)
 - 管道
 
 		| 管道符号
-		command 1 | command 2 他的功能是把第一个命令command 1执行的结果作为command 2的输入传给command 2
-		(/todo:与exec的区别)
+		command 1 | command 2 
+		他的功能是把第一个命令command 1执行的结果作为command 2的输入传给command 2
+		lic@lic:~/tmp$ ps -ef |grep ps
+		
 
 
 - 重定向
 		
+		用得最多的是 > 和 >>
+		lic@lic:~/tmp$ echo "hello, now is "`date +%s` > hello_world
+		lic@lic:~/tmp$ echo "hello, now is "`date +%s` >> hello_world
+
 		1.文件描述符:
 		0表示标准输入
 		1表示标准输出
@@ -81,34 +111,10 @@
 		&> 混合输出:不区分标准输出和错误输出
 		&等同于
 		/dev/null 垃圾桶:无法读取任何文件，也不会因为输出的内容过多而导致文件大小不断的增加
-		ls /tmp /nginx 1>a.txt 2>b.txt
-		> /dev/null 2>&1
-- 账户及权限切换
+		lic@lic:~/tmp$ ls /tmp /nginx 1>a.txt 2>b.txt 
+		lic@lic:~/tmp$ ls /tmp /nginx > /dev/null 2>&1 
 
-		sudo
-		su - 
-		exit
-		chmod u:用户，g:组，o:其它，a所有用户(默认)； r=4,w=2,x=1
-		//todo 文件夹 755 ，文件 644 
-		//7 等于 4+2+1 ， 4 是可读， 2 是可写， 1 是可执行
-
-
-##2.实用小命令
-- tr
-
-		lic@lic:~/tmp$ cat test_data |tr "string_1" "string_2"
-		lic@lic:~/tmp$ cat test_data |tr "a-l" "A-L"
-- date
-
-		lic@lic:~/tmp$ date
-		lic@lic:~/tmp$ date '+%c'
-		lic@lic:~/tmp$ date '+%D'
-		lic@lic:~/tmp$ date '+%x'
-		lic@lic:~/tmp$ date '+%T'
-		lic@lic:~/tmp$ date '+%X'
-		lic@lic:~/tmp$ date -d next-day +%Y%m%d
-		lic@lic:~/tmp$ date -d 'next monday'
-		lic@lic:~/tmp$ date -d '2 weeks'
+##2.查看日志
 - sort
 		
 		sort默认为升序，如果需要降序使用-r参数:
@@ -151,15 +157,6 @@
 		
 		去除重复行
 		lic@lic:~/tmp$ cat test_data |head -n 30 |uniq -c
-
-- 其他，例如base64
-
-		lic@lic:~/tmp$ echo "www.hypers.com" |base64
-		d3d3Lmh5cGVycy5jb20K
-		lic@lic:~/tmp$ echo "d3d3Lmh5cGVycy5jb20K" |base64 -d
-		www.hypers.com
-
-##3.常用命令
 - grep
 
 		qooweds@ubuntu:~/git/python$ cat test_data.txt |grep 104
@@ -178,34 +175,6 @@
 
 		排除某些行
 		qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -Ev "99|103" 
-- find
-
-		查找指定目录,指定深度,符合某些特征文件名的文件
-		qooweds@ubuntu:~/git/python$ find . -maxdepth 1 -name "test_data.txt"
-
-		查找含有某些字符串的文件
-		qooweds@ubuntu:~/git/python$ find . -maxdepth 1 -name "*.txt" |xargs grep -HEnv "99|103"
-
-- sed
-
-		替换并输出指定字符或字符串
-		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/字符串_1/字符串_2/g'
-		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\@/\#/g'
-
-		替换并修改指定字符或字符串
-		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\@/\#/g'
-
-		仅替换每行第一个
-		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\'"/\####/'
-
-		仅打印发生变化的行
-		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n 's/104/一百四/pg'
-		
-		限定替换的行
-		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n '80,85s/104/一百四/pg'
-
-		同时进行多种替换
-		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n '80,85s/104/一百四/pg;s/103/一百三/pg'
 - awk
 
 		默认分隔符为空格
@@ -240,8 +209,64 @@
 		n 跳到下一个搜索字符
 		# 跳到上一个搜索字符
 		vim内替换: 类似于sed
+
+##3.处理日志
+- tr
 		
-##4.其他命令介绍
+		字符串替换
+		lic@lic:~/tmp$ cat test_data |tr "string_1" "string_2"
+		
+		a-l大小写字母替换
+		lic@lic:~/tmp$ cat test_data |tr "a-l" "A-L"
+- wc
+
+		计算行数
+		lic@lic:~/tmp$ cat test_data |wc -l
+		计算字符数/判断文件是否为空
+		lic@lic:~/tmp$ cat test_data |wc -c
+- date
+
+		lic@lic:~/tmp$ date
+		lic@lic:~/tmp$ date '+%c'
+		lic@lic:~/tmp$ date '+%D'
+		lic@lic:~/tmp$ date '+%x'
+		lic@lic:~/tmp$ date '+%T'
+		lic@lic:~/tmp$ date '+%X'
+		lic@lic:~/tmp$ date -d next-day +%Y%m%d
+		lic@lic:~/tmp$ date -d 'next monday'
+		lic@lic:~/tmp$ date -d '2 weeks'
+- find
+
+		查找指定目录,指定深度,符合某些特征文件名的文件
+		qooweds@ubuntu:~/git/python$ find . -maxdepth 1 -name "test_data.txt"
+
+		查找含有某些字符串的文件
+		qooweds@ubuntu:~/git/python$ find . -maxdepth 1 -name "*.txt" |xargs grep -HEnv "99|103"
+
+- sed
+
+		替换并输出指定字符或字符串
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/字符串_1/字符串_2/g'
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\@/\#/g'
+
+		替换并修改指定字符或字符串
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\@/\#/g'
+
+		仅替换每行第一个
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\'"/\####/'
+
+		仅打印发生变化的行
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n 's/104/一百四/pg'
+		
+		限定替换的行
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n '80,85s/104/一百四/pg'
+
+		同时进行多种替换
+		qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n '80,85s/104/一百四/pg;s/103/一百三/pg'
+
+
+
+##4.任务自动化
 - crontab
 		
 		* * * * * date >> /tmp/echo_date > /dev/null 2>&1
@@ -252,9 +277,49 @@
 		包括使用密钥登录的方法，可以尝试修改自己VPS的登录方式为密钥登录
 		http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html)
 - rsync
-- 
+
 		-a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD
 		-v, --verbose 详细模式输出
+- mail
+
+		cat mail.txt |mail -s "$DATE Reconciliation" nigel.li@hypers.com
+- tar
+
+		无论是解压还是压缩，参数都是压缩包在前
+		lic@lic:~/tmp$ tar -zcvf test.tar.gz *
+		lic@lic:~/tmp$ tar -zxvf test.tar.gz
+- curl
+
+		lic@lic:~/tmp$ curl https://www.hypers.com
+-kill
+		
+		lic@lic:~/tmp$ kill pid
+		lic@lic:~/tmp$ kill -9 pid
+
+- 其他小工具
+
+		base64格式转换：
+		lic@lic:~/tmp$ echo "www.hypers.com" |base64
+		d3d3Lmh5cGVycy5jb20K
+		lic@lic:~/tmp$ echo "d3d3Lmh5cGVycy5jb20K" |base64 -d
+		www.hypers.com
+
+		时间戳转换：
+		lic@lic:~/tmp$ date +%s
+		1480251935
+		lic@lic:~/tmp$ date -d @1480251935
+		Sun Nov 27 21:05:35 CST 2016
+
+		shell脚本等..
+
+
+##5.与windows的交互
+- sz/rz
+- mount
+		
+		lic@lic:~/tmp$ sudo mount -t cifs //192.168.0.103/Users/linux_mount /home/lic/server/mount -o username=lic,password=read_passwd
+- xshell复制粘贴/登录
+##6.其他命令&工具介绍
 - top	
 
 		按1显示多核
@@ -262,23 +327,14 @@
 		mem：buffers指用于内核缓存的内存大小，cached指缓冲的交换空间大小
 - ps
 - netstat
-- wc
-
 - wget
-- tar
-- mail
-
-		cat mail.txt |mail -s "$DATE Reconciliation" nigel.li@hypers.com
-- curl
 - tcpdump	(//todo tcpdump与tcp/ip测试)
-- df等查看硬盘容量,文件大小命令
-- 常用小命令:ifconfig history Ctrl+r
+- df
+- ifconfig
+- history
+- uname -a
+- Ctrl+r
 
-//todo mount命令 挂载到虚拟机 sudo mount -t cifs //192.168.0.103/Users/linux_mount /home/lic/server/mount -o username=lic,password=read_passwd
 
-//todo 考虑分享往自动化的方向靠
-//todo 广度:设计场景,可以从场景来引导
-//todo 1.查看日志,做统计 
-//todo 
-//todo 深度:linux内存使用原理(大头)
-//todo 查看sql执行过的命令
+（我最喜欢的5个命令和操作CTRL+r crontab xshell复制粘贴/登录，sz/rz grep，如果大家也有自己喜欢的命令可以分享下）
+
