@@ -1,6 +1,11 @@
-X`#test
+#Shell常用命令分享
 
-##1.基础知识
+##1.常用操作
+- 第一次进入Linux会用到的命令
+
+		ls(按顺序显示文件), mv, cp, rm(注意rm -rf前要ls), touch, mkdir,pwd等命令,例如
+		root@laogu8:/home/sgm/logs# ls -Slr
+		root@laogu8:/home/sgm/logs# ls -lrt
 - Linux目录结构和文件
 
 		1.文件
@@ -10,6 +15,8 @@ X`#test
 		"/" :Linux文件系统的入口.也是最高一级的目录.
 		"." :当前目录
 		".." :父目录
+		"~" :用户根目录
+		
 		"/usr":存放用户使用系统命令和应用程序等信息.像命令.帮助文件等.
 		"/home":普通用户的目录默认存储目录.
 		"/etc":所有的系统配置文件.
@@ -42,11 +49,13 @@ X`#test
 		Linux的文件是没有所谓的扩展名的，扩展名只是作为执行软件或程序识别用；文件能否被执行仅与执行权限有关
 
 		3.软链接和硬链接
-		建立软链接ln -s
-		建立硬链接ln
 		inode:索引节点，是文件的唯一标识而非文件名
+		建立软链接 ln -s
+		建立硬链接 ln
+		显示inode ls -aliF
 		（元数据中的 inode 号才是文件的唯一标识而非文件名）
 		（参考文档:http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/）
+![](https://raw.githubusercontent.com/qooweds/for_test/master/image002.jpg)
 - 管道
 
 		| 管道符号
@@ -82,11 +91,7 @@ X`#test
 		chmod u:用户，g:组，o:其它，a所有用户(默认)； r=4,w=2,x=1
 		//todo 文件夹 755 ，文件 644 
 		//7 等于 4+2+1 ， 4 是可读， 2 是可写， 1 是可执行
-- 其他基本命令
 
-		ls, mv, cp, rm, touch, mkdir等命令,例如
-		root@laogu8:/home/sgm/logs# ls -Slr
-		root@laogu8:/home/sgm/logs# ls -lrt
 
 ##2.实用小命令
 - tr
@@ -238,9 +243,23 @@ X`#test
 		
 ##4.其他命令介绍
 - crontab
+		
+		* * * * * date >> /tmp/echo_date > /dev/null 2>&1
 - ssh
+		
+		ssh root@192.168.0.1 -p 222
+		(推荐阮一峰的一篇博客，介绍了ssh的一些原理，
+		包括使用密钥登录的方法，可以尝试修改自己VPS的登录方式为密钥登录
+		http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html)
 - rsync
-- top	// 按1显示多核
+- 
+		-a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD
+		-v, --verbose 详细模式输出
+- top	
+
+		按1显示多核
+		load average:当前，最新5分钟，最新15分钟的cpu平均负载
+		mem：buffers指用于内核缓存的内存大小，cached指缓冲的交换空间大小
 - ps
 - netstat
 - wc
@@ -248,12 +267,15 @@ X`#test
 - wget
 - tar
 - mail
+
+		cat mail.txt |mail -s "$DATE Reconciliation" nigel.li@hypers.com
 - curl
 - tcpdump	(//todo tcpdump与tcp/ip测试)
 - df等查看硬盘容量,文件大小命令
 - 常用小命令:ifconfig history Ctrl+r
 
-//todo mount命令 挂载到虚拟机
+//todo mount命令 挂载到虚拟机 sudo mount -t cifs //192.168.0.103/Users/linux_mount /home/lic/server/mount -o username=lic,password=read_passwd
+
 //todo 考虑分享往自动化的方向靠
 //todo 广度:设计场景,可以从场景来引导
 //todo 1.查看日志,做统计 

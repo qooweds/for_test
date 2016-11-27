@@ -1,0 +1,8 @@
+server_id,platform_server_id,inner_server_ip,server_path,server_db_name,server_db_ip,platform,db_port,gm_port,out_server_ip,status,1
+s172,fb_s0,192.168.7.205,data/xy/shengbei_s172_9172,shengbei_lianyun_s172,192.168.7.23,fb,3210,27214,192.168.7.205,running,1
+s177,fb_s1,192.168.7.205,data/xy/shengbei_s177_9177,shengbei_lianyun_s177,192.168.7.23,fb,3210,27714,192.168.7.205,running,2
+s236,fb_s2,192.168.7.222,data/xy/shengbei_s236_9236,shengbei_lianyun_s236,192.168.7.23,fb,3210,33614,192.168.7.222,running,1
+s237,fb_s3,192.168.7.223,data/xy/shengbei_s237_9237,shengbei_lianyun_s237,192.168.7.23,fb,3210,33614,192.168.7.227,running,1
+s238,fb_s4,192.168.7.205,data/xy/shengbei_s238_9238,shengbei_lianyun_s238,192.168.7.23,fb,3210,33614,192.168.7.205,running,3
+s239,fb_s5,192.168.7.222,data/xy/shengbei_s239_9239,shengbei_lianyun_s239,192.168.7.23,fb,3210,33614,192.168.7.222,running,2
+s240,fb_s6,192.168.7.205,data/xy/shengbei_s240_9240,shengbei_lianyun_s240,192.168.7.23,fb,3210,33614,192.168.7.205,running,4

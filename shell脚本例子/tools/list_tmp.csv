@@ -1,0 +1,3 @@
+server_id,platform_server_id,inner_server_ip,server_path,server_db_name,server_db_ip,platform,db_port,gm_port,out_server_ip,status,1
+s23,1377_s10,10.6.6.10,data/xy/shengbei_s23_9023,shengbei_lianyun_s23,10.6.3.121,1377,3306,12314,42.62.56.209,running,1
+s24,1377_s11,10.6.8.102,data/xy/shengbei_s24_9024,shengbei_lianyun_s24,10.6.3.121,1377,3306,12414,42.62.62.19,running,1

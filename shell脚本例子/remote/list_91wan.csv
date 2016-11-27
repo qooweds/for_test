@@ -1,0 +1,6 @@
+server_id,platform_server_id,inner_server_ip,server_path,server_db_name,server_db_ip,platform,db_port,gm_port,out_server_ip,status,
+s64,91wan_s1,10.6.5.169,data/xy/shengbei_s64_9064,shengbei_lianyun_s64,10.6.5.191,91wan,3306,16414,42.62.3.179,running,
+s103,91wan_s2,10.6.5.169,data/xy/shengbei_s103_9103,shengbei_lianyun_s103,10.6.5.191,91wan,3306,20314,42.62.3.179,running,
+s132,91wan_s3,10.6.5.169,data/xy/shengbei_s132_9132,shengbei_lianyun_s132,10.6.5.191,91wan,3306,23214,42.62.3.179,running,
+s145,91wan_s4,10.6.5.114,data/xy/shengbei_s145_9145,shengbei_lianyun_s145,10.6.5.191,91wan,3306,24514,42.62.14.88,running,
+s151,91wan_s5,10.6.5.114,data/xy/shengbei_s151_9151,shengbei_lianyun_s151,10.6.5.191,91wan,3306,25114,42.62.14.88,running,
