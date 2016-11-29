@@ -4,12 +4,15 @@
 - 第一次进入Linux会用到的命令
 
 		ls(按顺序显示文件), cd(cd -), cat, mv, cp, rm(注意rm -rf前要ls), touch, mkdir,pwd等命令,例如
+
+		按文件大小排序
 		root@laogu8:/home/sgm/logs# ls -Slr
+		按时间逆序
 		root@laogu8:/home/sgm/logs# ls -lrt
 - 了解一下各个目录存放什么
 
 		1.文件
-		在linux系统中一切皆文件.文件夹和设备都是文件.使用文件描述符(fd:file descriptor)来对文件进行操作.文件描述符是整数
+		linux下对所有的资源的操作都是对文件.文件夹和设备都是文件.使用文件描述符(fd:file descriptor)来对文件进行操作.文件描述符是整数
 		
 		2.目录结构
 		"/" :Linux文件系统的入口.也是最高一级的目录.
@@ -115,19 +118,6 @@
 		lic@lic:~/tmp$ ls /tmp /nginx > /dev/null 2>&1 
 
 ##2.查看日志
-- sort
-		
-		sort默认为升序，如果需要降序使用-r参数:
-		lic@lic:~/tmp$ cat test_data |sort -r
-
-		以数值大小来排序使用-n参数
-		设置间隔符使用-t参数
-		指定列数使用-k参数
-		lic@lic:~/tmp$ cat test_data |sort -k4nr -t :
-
-		忽略大小写使用-f参数
-		
-		
 - head/tail
 
 		显示前30行
@@ -139,20 +129,29 @@
 
 - more/less
 
-		Enter    向下n行，需要定义。默认为1行
-		Ctrl+F   向下滚动一屏
-		空格键  向下滚动一屏
-		Ctrl+B  返回上一屏
-		=       输出当前行的行号
-		：f     输出文件名和当前行的行号
-		V      调用vi编辑器
-		!命令   调用Shell，并执行命令 
-		q       退出more
+		以less举例
+		翻页:空格
+		向上翻页:b
+		向下一行:回车
+		向上一行:y
 		
+		显示行号
+		lic@lic:~/tmp$ cat test_data |less -N
 		从第50行开始显示
-		lic@lic:~/tmp$ cat test_data |more +50
+		lic@lic:~/tmp$ cat test_data |less +50
 		从的一个string_1开始显示
-		lic@lic:~/tmp$ cat test_data |more +/string_1
+		lic@lic:~/tmp$ cat test_data |less +/string_1
+- sort
+		
+		sort默认为升序，如果需要降序使用-r参数:
+		lic@lic:~/tmp$ cat test_data |sort -r
+
+		以数值大小来排序使用-n参数
+		设置间隔符使用-t参数
+		指定列数使用-k参数
+		lic@lic:~/tmp$ cat test_data |sort -k4nr -t :
+
+		忽略大小写使用-f参数
 - uniq
 		
 		去除重复行
@@ -191,10 +190,6 @@
 
 		BEGIN,END模式
 		qooweds@ubuntu:~/git/python$ cat test_data.txt |head -5|awk -F ':|,' 'BEGIN {print "aaa"} {if($9>90)print $9} END{print "bbb"}'
-		
-		//todo tail -f |awk
-		//todo linux/win/mac 下的换行符
-
 - vim
 
 		0 到行头
@@ -209,8 +204,21 @@
 		n 跳到下一个搜索字符
 		# 跳到上一个搜索字符
 		vim内替换: 类似于sed
+		(推荐陈皓的博客: http://coolshell.cn/articles/5426.html)
 
 ##3.处理日志
+- 修改配置
+
+		修改vim配置
+		/usr/share/vim/vimrc (rc = RunCom = Run commands, 表示包含命令启动信息的文件)
+		~/.vimrc
+		修改环境变量
+		~/.profile 
+		及bash对应的bash_profile, bashrc, bash_logout
+- 使用别名
+
+		修改~/.bashrc
+		添加想要使用的别名,例如: alias gohome="cd ~"
 - tr
 		
 		字符串替换
@@ -218,6 +226,8 @@
 		
 		a-l大小写字母替换
 		lic@lic:~/tmp$ cat test_data |tr "a-l" "A-L"
+		
+		tr比sed好的是可以比较方便的处理换行符
 - wc
 
 		计算行数
@@ -270,6 +280,7 @@
 - crontab
 		
 		* * * * * date >> /tmp/echo_date > /dev/null 2>&1
+		分　时　日　月　周
 - ssh
 		
 		ssh root@192.168.0.1 -p 222
@@ -291,12 +302,12 @@
 - curl
 
 		lic@lic:~/tmp$ curl https://www.hypers.com
--kill
+- kill
 		
 		lic@lic:~/tmp$ kill pid
 		lic@lic:~/tmp$ kill -9 pid
 
-- 其他小工具
+- 其他小工具(举2个例子)
 
 		base64格式转换：
 		lic@lic:~/tmp$ echo "www.hypers.com" |base64
@@ -328,7 +339,7 @@
 - ps
 - netstat
 - wget
-- tcpdump	(//todo tcpdump与tcp/ip测试)
+- tcpdump	
 - df
 - ifconfig
 - history
