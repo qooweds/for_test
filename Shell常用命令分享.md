@@ -1,4 +1,5 @@
 #Shell常用命令分享
+本文的主旨是希望为刚接触Linux的同学分享一些常用的命令
 
 ##1.常用操作
 - 第一次进入Linux会用到的命令
@@ -17,12 +18,14 @@
 		".." :父目录
 		"~" :用户根目录
 		
+		常用：
 		"/usr":存放用户使用系统命令和应用程序等信息.像命令.帮助文件等.
 		"/home":普通用户的目录默认存储目录.
 		"/etc":所有的系统配置文件.
 		"/proc":系统信息目录.只存在内存当中，而不占用外存空间.(./cpuinfo ./meminfo ./net/)
 		"/bin":基本系统所需要的命令,功能和"/usr/bin"类似,这个目录下的文件都是可执行的.普通用户也是可以执行的.
-
+		
+		可能不会很常用:
 		"/boot":内核和加载内核所需要的文件.grub系统引导管理器也在这个目录下.
 		"/dev":设备文件存储目录.像终端.磁盘等.
 		"/lib":库文件和内核模块存放目录.
@@ -117,7 +120,9 @@
 ##2.查看日志
 - sort
 		
-		sort默认为升序，如果需要降序使用-r参数:
+		sort为排序命令
+
+		默认为升序，如果需要降序使用-r参数:
 		lic@lic:~/tmp$ cat test_data |sort -r
 
 		以数值大小来排序使用-n参数
@@ -130,6 +135,8 @@
 		
 - head/tail
 
+		head/tail为显示文件头/尾行数的命令
+
 		显示前30行
 		lic@lic:~/tmp$ cat test_data |head -n 30
 		显示前30个字节
@@ -138,6 +145,8 @@
 		lic@lic:~/tmp$ cat test_data |head -n -30
 
 - more/less
+
+		more/less命令可以对文件或其它输出进行分页显示，建议使用less
 
 		Enter    向下n行，需要定义。默认为1行
 		Ctrl+F   向下滚动一屏
@@ -155,10 +164,14 @@
 		lic@lic:~/tmp$ cat test_data |more +/string_1
 - uniq
 		
+		uniq命令作用是报告或删除文件中重复的行
+
 		去除重复行
 		lic@lic:~/tmp$ cat test_data |head -n 30 |uniq -c
 - grep
 
+		grep是一个强大的命令
+		它能使用正则表达式搜索文本，并把匹配的行打印出来
 		qooweds@ubuntu:~/git/python$ cat test_data.txt |grep 104
 
 		打印行号
@@ -176,6 +189,9 @@
 		排除某些行
 		qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -Ev "99|103" 
 - awk
+
+		awk是一个强大的命令
+		它的机制把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理
 
 		默认分隔符为空格
 		qooweds@ubuntu:~/git/python$ cat test_data.txt |awk '{print $2}'
@@ -226,6 +242,7 @@
 		lic@lic:~/tmp$ cat test_data |wc -c
 - date
 
+		查看/处理时间和日期
 		lic@lic:~/tmp$ date
 		lic@lic:~/tmp$ date '+%c'
 		lic@lic:~/tmp$ date '+%D'
@@ -269,30 +286,36 @@
 ##4.任务自动化
 - crontab
 		
+		定时任务
 		* * * * * date >> /tmp/echo_date > /dev/null 2>&1
 - ssh
-		
+		使用ssh协议
 		ssh root@192.168.0.1 -p 222
 		(推荐阮一峰的一篇博客，介绍了ssh的一些原理，
 		包括使用密钥登录的方法，可以尝试修改自己VPS的登录方式为密钥登录
 		http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html)
 - rsync
 
+		文件传输工具
 		-a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD
 		-v, --verbose 详细模式输出
 - mail
 
+		发邮件
 		cat mail.txt |mail -s "$DATE Reconciliation" nigel.li@hypers.com
 - tar
 
+		压缩/解压
 		无论是解压还是压缩，参数都是压缩包在前
 		lic@lic:~/tmp$ tar -zcvf test.tar.gz *
 		lic@lic:~/tmp$ tar -zxvf test.tar.gz
 - curl
 
+		访问URL的命令
 		lic@lic:~/tmp$ curl https://www.hypers.com
 -kill
 		
+		关闭进程的命令
 		lic@lic:~/tmp$ kill pid
 		lic@lic:~/tmp$ kill -9 pid
 
@@ -325,16 +348,16 @@
 		按1显示多核
 		load average:当前，最新5分钟，最新15分钟的cpu平均负载
 		mem：buffers指用于内核缓存的内存大小，cached指缓冲的交换空间大小
-- ps
-- netstat
-- wget
-- tcpdump	(//todo tcpdump与tcp/ip测试)
-- df
-- ifconfig
-- history
-- uname -a
-- Ctrl+r
+- ps	查看进程相关信息
+- netstat	查看网络相关信息
+- wget	下载命令
+- tcpdump	网络流量监控命令
+- df	磁盘相关信息
+- ifconfig	ip相关
+- history	历史命令
+- uname 系统信息，查看全部系统信息uname -a
+- Ctrl+r	搜索使用过的命令
 
 
-（我最喜欢的5个命令和操作CTRL+r crontab xshell复制粘贴/登录，sz/rz grep，如果大家也有自己喜欢的命令可以分享下）
+
 
