@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shell常用命令分享</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Shell常用命令分享</h1>
+<h2>1.常用操作</h2>
+<ul>
+<li>
+<p>第一次进入Linux会用到的命令</p>
+<pre><code>ls(按顺序显示文件), cd(cd -), cat, mv, cp, rm(注意rm -rf前要ls), touch, mkdir,pwd等命令,例如
+
+按文件大小排序
+root@laogu8:/home/sgm/logs# ls -Slr
+按时间逆序
+root@laogu8:/home/sgm/logs# ls -lrt
+</code></pre>
+
+</li>
+<li>
+<p>了解一下各个目录存放什么</p>
+<pre><code>1.文件
+linux下对所有的资源的操作都是对文件.文件夹和设备都是文件.使用文件描述符(fd:file descriptor)来对文件进行操作.文件描述符是整数
+
+2.目录结构
+&quot;/&quot; :Linux文件系统的入口.也是最高一级的目录.
+&quot;.&quot; :当前目录
+&quot;..&quot; :父目录
+&quot;~&quot; :用户根目录
+
+&quot;/usr&quot;:存放用户使用系统命令和应用程序等信息.像命令.帮助文件等.
+&quot;/home&quot;:普通用户的目录默认存储目录.
+&quot;/etc&quot;:所有的系统配置文件.
+&quot;/proc&quot;:系统信息目录.只存在内存当中，而不占用外存空间.(./cpuinfo ./meminfo ./net/)
+&quot;/bin&quot;:基本系统所需要的命令,功能和&quot;/usr/bin&quot;类似,这个目录下的文件都是可执行的.普通用户也是可以执行的.
+
+&quot;/boot&quot;:内核和加载内核所需要的文件.grub系统引导管理器也在这个目录下.
+&quot;/dev&quot;:设备文件存储目录.像终端.磁盘等.
+&quot;/lib&quot;:库文件和内核模块存放目录.
+&quot;/media&quot;:即插即用设备的挂载点自动存放在这个目录下.像U盘,cdrom/dvd自动挂载后,就会在这个目录下.
+&quot;/mnt&quot;:临时文件系统的挂载点目录.
+&quot;/opt&quot;:第三方软件的存放目录.
+&quot;/root&quot;:Linux超级权限用户root的根目录.
+&quot;/sbin&quot;:基本的系统维护命令,只能由超级用户使用.
+&quot;/srv&quot;:存放一些服务器启动之后需要提取的数据.
+&quot;/tmp&quot;:临时文件目录.
+&quot;/var&quot;:存放经常变动的数据,像日志.邮件等.
+</code></pre>
+
+</li>
+<li>
+<p>了解单个文件的使用</p>
+<pre><code>1.查看
+lic@lic:~/tmp$ ls -l 
+-rw-rw-r-- 1 lic lic 19 Oct 25 07:21 tmp1.sh
+第一个小格是特殊表示格，表示目录或连结文件等等，d表示目录，l表示软链接文件，“-”表示文件
+后面9个小格:rw-(Owner)rw-(Group)r--(Other)
+第二个栏位，表示文件个数
+第三个栏位，表示该文件或目录的拥有者
+第四个栏位，表示所属的group
+第五栏位，表示文件大小
+第六个栏位，表示创建日期
+第七个栏位，表示文件名
+扩展名只是作为执行软件或程序识别用；文件能否被执行仅与执行权限有关
+
+2.权限
+sudo
+su - 
+exit
+chmod 
+u:用户，g:组，o:其它，a所有用户(默认)； 
+r=4,w=2,x=1
+//7 等于 4+2+1 ， 4 是可读， 2 是可写， 1 是可执行
+常见权限：
+444 r–r–r–
+600 rw——-
+644 rw-r–r–
+666 rw-rw-rw-
+700 rwx——
+744 rwxr–r–
+755 rwxr-xr-x
+777 rwxrwxrwx
+lic@lic:~/tmp$ chmod a+x test
+lic@lic:~/tmp$ chmod 777 test
+
+
+3.软链接和硬链接
+inode:索引节点，是文件的唯一标识而非文件名
+建立软链接 ln -s 存放是另一文件的路径名的指向
+建立硬链接 ln        存放的是inode的指向
+显示inode ls -i
+好处：方便，隐藏路径，增加安全性
+
+（了解更多:http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/）
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/qooweds/for_test/master/image002.jpg" /></p>
+</li>
+<li>
+<p>管道</p>
+<pre><code>| 管道符号
+command 1 | command 2 
+他的功能是把第一个命令command 1执行的结果作为command 2的输入传给command 2
+lic@lic:~/tmp$ ps -ef |grep ps
+</code></pre>
+
+</li>
+<li>
+<p>重定向</p>
+<pre><code>用得最多的是 &gt; 和 &gt;&gt;
+lic@lic:~/tmp$ echo &quot;hello, now is &quot;`date +%s` &gt; hello_world
+lic@lic:~/tmp$ echo &quot;hello, now is &quot;`date +%s` &gt;&gt; hello_world
+
+1.文件描述符:
+0表示标准输入
+1表示标准输出
+2表示标准错误
+
+2.重定向输出:将命令的正常输出结果保存到指定的文件中,而不是直接显示在显示器的屏幕上
+若重定向的输出的文件不存在，则会新建该文件
+&gt; 重定向输出(覆盖文件)
+&gt;&gt; 重定向输出(追加内容)
+
+其他重定向知识
+&lt; 重定向输入: 将命令中接收输入的途径由默认的键盘改为其他文件.而不是等待从键盘输入
+2&gt; 错误重定向:类似于重定向输出
+&amp;&gt; 混合输出:不区分标准输出和错误输出
+&amp;等同于
+/dev/null 垃圾桶:无法读取任何文件，也不会因为输出的内容过多而导致文件大小不断的增加
+lic@lic:~/tmp$ ls /tmp /nginx 1&gt;a.txt 2&gt;b.txt 
+lic@lic:~/tmp$ ls /tmp /nginx &gt; /dev/null 2&gt;&amp;1 
+</code></pre>
+
+</li>
+</ul>
+<h2>2.查看日志</h2>
+<ul>
+<li>
+<p>head/tail</p>
+<pre><code>显示前30行
+lic@lic:~/tmp$ cat test_data |head -n 30
+显示前30个字节
+lic@lic:~/tmp$ cat test_data |head -c 30
+显示除前30行之外的行数
+lic@lic:~/tmp$ cat test_data |head -n -30
+</code></pre>
+
+</li>
+<li>
+<p>more/less</p>
+<pre><code>以less举例
+翻页:空格
+向上翻页:b
+向下一行:回车
+向上一行:y
+
+显示行号
+lic@lic:~/tmp$ cat test_data |less -N
+从第50行开始显示
+lic@lic:~/tmp$ cat test_data |less +50
+从的一个string_1开始显示
+lic@lic:~/tmp$ cat test_data |less +/string_1
+</code></pre>
+
+</li>
+<li>
+<p>sort</p>
+<pre><code>sort默认为升序，如果需要降序使用-r参数:
+lic@lic:~/tmp$ cat test_data |sort -r
+
+以数值大小来排序使用-n参数
+设置间隔符使用-t参数
+指定列数使用-k参数
+lic@lic:~/tmp$ cat test_data |sort -k4nr -t :
+
+忽略大小写使用-f参数
+</code></pre>
+
+</li>
+<li>
+<p>uniq</p>
+<pre><code>去除重复行
+lic@lic:~/tmp$ cat test_data |head -n 30 |uniq -c
+</code></pre>
+
+</li>
+<li>
+<p>grep</p>
+<pre><code>qooweds@ubuntu:~/git/python$ cat test_data.txt |grep 104
+
+打印行号
+qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -n 104
+
+打印文件名
+qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -H 104
+
+统计行数
+qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -c 104
+
+使用扩展的正则表达式
+qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -E &quot;104|103&quot;
+
+排除某些行
+qooweds@ubuntu:~/git/python$ cat test_data.txt |grep -Ev &quot;99|103&quot; 
+</code></pre>
+
+</li>
+<li>
+<p>awk</p>
+<pre><code>默认分隔符为空格
+qooweds@ubuntu:~/git/python$ cat test_data.txt |awk '{print $2}'
+
+指定分隔符
+qooweds@ubuntu:~/git/python$ cat test_data.txt |awk -F ':' '{print $2}'
+
+对某一列数值按数值从大到小进行排序
+qooweds@ubuntu:~/git/python$ cat test_data.txt |awk -F ':|,' '{print $9}' |sort -k1nr |head -20
+
+将邮箱按ASCII字符顺序进行排序
+qooweds@ubuntu:~/git/python$ cat test_data.txt |awk -F ':|,' '{print $13}' |sed 's/\&quot;//g' |sort -k1 |head -20
+
+BEGIN,END模式
+qooweds@ubuntu:~/git/python$ cat test_data.txt |head -5|awk -F ':|,' 'BEGIN {print &quot;aaa&quot;} {if($9&gt;90)print $9} END{print &quot;bbb&quot;}'
+</code></pre>
+
+</li>
+<li>
+<p>vim</p>
+<pre><code>0 到行头
+$ 到行尾
+gg 到文档头
+G 到文档尾
+dd 剪切当前行
+(n)dd 剪切从当前行起的多行
+o 从下一行插入
+O 从上一行插入
+/pattern → 搜索 pattern 的字符串
+n 跳到下一个搜索字符
+# 跳到上一个搜索字符
+vim内替换: 类似于sed
+(推荐陈皓的博客: http://coolshell.cn/articles/5426.html)
+</code></pre>
+
+</li>
+</ul>
+<h2>3.处理日志</h2>
+<ul>
+<li>
+<p>修改配置</p>
+<pre><code>修改vim配置
+/usr/share/vim/vimrc (rc = RunCom = Run commands, 表示包含命令启动信息的文件)
+~/.vimrc
+修改环境变量
+~/.profile 
+及bash对应的bash_profile, bashrc, bash_logout
+</code></pre>
+
+</li>
+<li>
+<p>使用别名</p>
+<pre><code>修改~/.bashrc
+添加想要使用的别名,例如: alias gohome=&quot;cd ~&quot;
+</code></pre>
+
+</li>
+<li>
+<p>tr</p>
+<pre><code>字符串替换
+lic@lic:~/tmp$ cat test_data |tr &quot;string_1&quot; &quot;string_2&quot;
+
+a-l大小写字母替换
+lic@lic:~/tmp$ cat test_data |tr &quot;a-l&quot; &quot;A-L&quot;
+
+tr比sed好的是可以比较方便的处理换行符
+</code></pre>
+
+</li>
+<li>
+<p>wc</p>
+<pre><code>计算行数
+lic@lic:~/tmp$ cat test_data |wc -l
+计算字符数/判断文件是否为空
+lic@lic:~/tmp$ cat test_data |wc -c
+</code></pre>
+
+</li>
+<li>
+<p>date</p>
+<pre><code>lic@lic:~/tmp$ date
+lic@lic:~/tmp$ date '+%c'
+lic@lic:~/tmp$ date '+%D'
+lic@lic:~/tmp$ date '+%x'
+lic@lic:~/tmp$ date '+%T'
+lic@lic:~/tmp$ date '+%X'
+lic@lic:~/tmp$ date -d next-day +%Y%m%d
+lic@lic:~/tmp$ date -d 'next monday'
+lic@lic:~/tmp$ date -d '2 weeks'
+</code></pre>
+
+</li>
+<li>
+<p>find</p>
+<pre><code>查找指定目录,指定深度,符合某些特征文件名的文件
+qooweds@ubuntu:~/git/python$ find . -maxdepth 1 -name &quot;test_data.txt&quot;
+
+查找含有某些字符串的文件
+qooweds@ubuntu:~/git/python$ find . -maxdepth 1 -name &quot;*.txt&quot; |xargs grep -HEnv &quot;99|103&quot;
+</code></pre>
+
+</li>
+<li>
+<p>sed</p>
+<pre><code>替换并输出指定字符或字符串
+qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/字符串_1/字符串_2/g'
+qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\@/\#/g'
+
+替换并修改指定字符或字符串
+qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\@/\#/g'
+
+仅替换每行第一个
+qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -e 's/\'&quot;/\####/'
+
+仅打印发生变化的行
+qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n 's/104/一百四/pg'
+
+限定替换的行
+qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n '80,85s/104/一百四/pg'
+
+同时进行多种替换
+qooweds@ubuntu:~/git/python$ cat test_data.txt |sed -n '80,85s/104/一百四/pg;s/103/一百三/pg'
+</code></pre>
+
+</li>
+</ul>
+<h2>4.任务自动化</h2>
+<ul>
+<li>
+<p>crontab</p>
+<pre><code>* * * * * date &gt;&gt; /tmp/echo_date &gt; /dev/null 2&gt;&amp;1
+分　时　日　月　周
+</code></pre>
+
+</li>
+<li>
+<p>ssh</p>
+<pre><code>ssh root@192.168.0.1 -p 222
+(推荐阮一峰的一篇博客，介绍了ssh的一些原理，
+包括使用密钥登录的方法，可以尝试修改自己VPS的登录方式为密钥登录
+http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html)
+</code></pre>
+
+</li>
+<li>
+<p>rsync</p>
+<pre><code>-a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD
+-v, --verbose 详细模式输出
+</code></pre>
+
+</li>
+<li>
+<p>mail</p>
+<pre><code>cat mail.txt |mail -s &quot;$DATE Reconciliation&quot; nigel.li@hypers.com
+</code></pre>
+
+</li>
+<li>
+<p>tar</p>
+<pre><code>无论是解压还是压缩，参数都是压缩包在前
+lic@lic:~/tmp$ tar -zcvf test.tar.gz *
+lic@lic:~/tmp$ tar -zxvf test.tar.gz
+</code></pre>
+
+</li>
+<li>
+<p>curl</p>
+<pre><code>lic@lic:~/tmp$ curl https://www.hypers.com
+</code></pre>
+
+</li>
+<li>
+<p>kill</p>
+<pre><code>lic@lic:~/tmp$ kill pid
+lic@lic:~/tmp$ kill -9 pid
+</code></pre>
+
+</li>
+<li>
+<p>其他小工具(举2个例子)</p>
+<pre><code>base64格式转换：
+lic@lic:~/tmp$ echo &quot;www.hypers.com&quot; |base64
+d3d3Lmh5cGVycy5jb20K
+lic@lic:~/tmp$ echo &quot;d3d3Lmh5cGVycy5jb20K&quot; |base64 -d
+www.hypers.com
+
+时间戳转换：
+lic@lic:~/tmp$ date +%s
+1480251935
+lic@lic:~/tmp$ date -d @1480251935
+Sun Nov 27 21:05:35 CST 2016
+
+shell脚本等..
+</code></pre>
+
+</li>
+</ul>
+<h2>5.与windows的交互</h2>
+<ul>
+<li>sz/rz</li>
+<li>
+<p>mount</p>
+<pre><code>lic@lic:~/tmp$ sudo mount -t cifs //192.168.0.103/Users/linux_mount /home/lic/server/mount -o username=lic,password=read_passwd
+</code></pre>
+
+</li>
+<li>xshell复制粘贴/登录</li>
+</ul>
+<h2>6.其他命令&amp;工具介绍</h2>
+<ul>
+<li>
+<p>top	</p>
+<pre><code>按1显示多核
+load average:当前，最新5分钟，最新15分钟的cpu平均负载
+mem：buffers指用于内核缓存的内存大小，cached指缓冲的交换空间大小
+</code></pre>
+
+</li>
+<li>ps</li>
+<li>netstat</li>
+<li>wget</li>
+<li>tcpdump	</li>
+<li>df</li>
+<li>ifconfig</li>
+<li>history</li>
+<li>uname -a</li>
+<li>Ctrl+r</li>
+</ul>
+<p>（我最喜欢的5个命令和操作CTRL+r crontab xshell复制粘贴/登录，sz/rz grep，如果大家也有自己喜欢的命令可以分享下）</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
